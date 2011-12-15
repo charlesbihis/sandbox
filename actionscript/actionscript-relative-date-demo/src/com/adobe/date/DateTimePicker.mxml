@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group
+		xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<fx:Script>
+		<![CDATA[
+		private var _selectedDate:Date = new Date();
+		
+		[Bindable]
+		public function get selectedDate():Date
+		{
+			return _selectedDate;
+		}
+		
+		public function set selectedDate(value:Date):void
+		{
+			_selectedDate = value;
+			
+			ampmPicker.selectedValue = (value.getHours() >= 12) ? 2 : 1;
+			hourPicker.value = (value.getHours() < 13) ? value.getHours() : value.getHours() - 12;
+			minutePicker.value = value.getMinutes();
+			
+			if (value.getHours() == 0)
+			{
+				hourPicker.value = 12;
+			}
+			
+			validateNow();
+		}
+		
+		public function handleChange():void
+		{
+			var militaryHours:int = hourPicker.value;
+			if(ampmPicker.selectedValue == 2 && hourPicker.value != 12)
+			{
+				militaryHours = hourPicker.value + 12; 
+			}
+			else if(ampmPicker.selectedValue == 1 && hourPicker.value == 12)
+			{
+				militaryHours = 0;
+			}
+			
+			var pickerDate:Date = datePicker.selectedDate;
+			selectedDate = new Date(
+					pickerDate.getFullYear(),
+					pickerDate.getMonth(),
+					pickerDate.getDate(),
+					militaryHours,
+					minutePicker.value)
+			
+			invalidateProperties();
+			validateNow();
+			dispatchEvent(new Event(Event.CHANGE));
+		}
+		]]>
+	</fx:Script>
+	
+	<fx:Metadata>
+		[Event(name="change", type="flash.events.Event")]
+	</fx:Metadata>
+	
+	<fx:Declarations>
+		<s:RadioButtonGroup id="ampmPicker" selectedValue="1" change="handleChange()" />
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:HorizontalLayout />
+	</s:layout>
+	
+	<mx:DateField id="datePicker" selectedDate="{selectedDate}" change="handleChange()" />
+	<s:Spacer width="20" />
+	
+	<s:NumericStepper id="hourPicker" minimum="1" maximum="12" stepSize="1" change="handleChange()" valueCommit="handleChange()" textAlign="center" />
+	<s:Label text=":" textAlign="center"/>
+	<s:NumericStepper id="minutePicker" minimum="0"  maximum="59" stepSize="1" change="handleChange()" valueCommit="handleChange()" textAlign="center" />
+	<s:Spacer width="10" />
+	
+	<s:RadioButton value="1" label="AM" group="{ampmPicker}" />
+	<s:RadioButton value="2" label="PM" group="{ampmPicker}" />
+	
+</s:Group>

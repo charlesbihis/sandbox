@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application
+		xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		creationComplete="init()">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.util.Diff;
+			import com.adobe.util.Operation;
+			
+			private var BEFORE_TEXT:String = "The quick brown fox jumps over the lazy dog.";
+			private var AFTER_TEXT:String = "The quick fox hops over the lazy brown dog.";
+			
+			private function init():void
+			{
+				beforeText.text = BEFORE_TEXT;
+				afterText.text = AFTER_TEXT;
+				
+				showChanges();
+			}  // init
+			
+			private function showChanges():void
+			{
+				var diffs:Array = new Diff().diff(beforeText.text, afterText.text);
+				
+				var changesString:String = "";
+				for (var i:int = 0; i < diffs.length; i++)
+				{
+					var operation:Operation = diffs[i] as Operation;
+					switch(operation.op)
+					{
+						case Operation.EQUAL:
+							changesString += operation.string;
+							break;
+						case Operation.INSERT:
+							changesString += "<font color='#00FF00'>" + operation.string + "</font>";
+							break;
+						case Operation.DELETE:
+							changesString += "<font color='#FF0000'>" + operation.string + "</font>";
+							break;
+					}  // switch statement
+				}  // for loop
+				changes.htmlText = changesString;
+			}  // showChanges
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout paddingTop="15" paddingBottom="15" paddingLeft="15" paddingRight="15" />
+	</s:layout>
+	
+	<s:HGroup paddingTop="15" paddingBottom="15">
+		<s:VGroup>
+			<s:Label text="Before:" fontSize="17" fontWeight="bold" />
+			<s:TextArea id="beforeText" width="300" height="150" change="showChanges()" />
+		</s:VGroup>
+		<s:VGroup>
+			<s:Label text="After:" fontSize="17" fontWeight="bold" />
+			<s:TextArea id="afterText" width="300" height="150" change="showChanges()" />
+		</s:VGroup>
+	</s:HGroup>
+	
+	<s:Label text="Changes:" fontSize="17" fontWeight="bold" />
+	<mx:Text id="changes" />
+	
+</s:Application>

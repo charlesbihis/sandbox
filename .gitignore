@@ -1,11 +1,11 @@
 # actionscript-diff-demo
 actionscript/actionscript-diff-demo/.settings
-actionscript/actionscript-diff-demo/bin/*
 actionscript/actionscript-diff-demo/bin-debug/*
+actionscript/actionscript-diff-demo/bin-release/*
 actionscript/actionscript-diff-demo/html-template/*
 
 # actionscript-relative-date-demo
 actionscript/actionscript-relative-date-demo/.settings
-actionscript/actionscript-relative-date-demo/bin/*
 actionscript/actionscript-relative-date-demo/bin-debug/*
+actionscript/actionscript-relative-date-demo/bin-release/*
 actionscript/actionscript-relative-date-demo/html-template/*

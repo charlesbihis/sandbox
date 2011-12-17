@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application
+		xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		creationComplete="init()">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.protocols.oauth2.OAuth2;
+			import com.adobe.protocols.oauth2.event.GetAccessTokenEvent;
+			import com.adobe.protocols.oauth2.grant.AuthorizationCodeGrant;
+			import com.adobe.protocols.oauth2.grant.IGrantType;
+			
+			import mx.logging.LogEventLevel;
+
+			private var stageWebView:StageWebView;
+			
+			private function init():void
+			{
+				this.addEventListener("render", onRender);
+				
+				stageWebView = new StageWebView();
+			}  // init
+			
+			private function getAccessToken():void
+			{
+				// set up our StageWebView object to use our visible stage
+				stageWebView.stage = stage;
+				
+				// set up the call
+				var oauth2:OAuth2 = new OAuth2("https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token", LogEventLevel.DEBUG);
+				var grant:IGrantType = new AuthorizationCodeGrant(stageWebView, "64530189872.apps.googleusercontent.com", "n0d_CKAxzk_DaeoC4ObSmDl8", "http://www.adobe.com", "https://www.googleapis.com/auth/userinfo.profile");
+				
+				/**
+				 * Sample OAuth 2.0 Grant Type Configurations
+				 * 
+				 * Adobe Authorization Code Grant Example
+				 *   var oauth2:OAuth2 = new OAuth2("https://ims-na1.adobelogin.com/ims/authorize", "https://ims-na1.adobelogin.com/ims/token", LogEventLevel.DEBUG);
+				 *   var grant:IGrantType = new AuthorizationCodeGrant(stageWebView, "INSERT_CLIENT_ID_HERE", "INSERT_CLIENT_SECRET_HERE", "http://www.adobe.com", "openid");
+				 * 
+				 * Adobe Implicit Grant Example
+				 *   var oauth2:OAuth2 = new OAuth2("https://ims-na1.adobelogin.com/ims/authorize", "https://ims-na1.adobelogin.com/ims/token", LogEventLevel.DEBUG);
+				 *   var grant:IGrantType = new ImplicitGrant(stageWebView, "INSERT_CLIENT_ID_HERE", "http://www.adobe.com", "openid");
+				 * 
+				 * Google Authorization Code Grant Example
+				 *   var oauth2:OAuth2 = new OAuth2("https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token", LogEventLevel.DEBUG);
+				 *   var grant:IGrantType = new AuthorizationCodeGrant(stageWebView, "64530189872.apps.googleusercontent.com", "n0d_CKAxzk_DaeoC4ObSmDl8", "http://www.adobe.com", "https://www.googleapis.com/auth/userinfo.profile");
+				 * 
+				 * Google Implicit Grant Example
+				 *   var oauth2:OAuth2 = new OAuth2("https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token", LogEventLevel.DEBUG);
+				 *   var grant:IGrantType = new ImplicitGrant(stageWebView, "64530189872.apps.googleusercontent.com", "http://www.adobe.com", "https://www.googleapis.com/auth/userinfo.profile");
+				 */
+				
+				// make the call
+				oauth2.addEventListener(GetAccessTokenEvent.TYPE, onGetAccessToken);
+				oauth2.getAccessToken(grant);
+				
+				function onGetAccessToken(getAccessTokenEvent:GetAccessTokenEvent):void
+				{
+					// get rid of our StageWebView object since we don't need it anymore
+					stageWebView.dispose();
+					removeEventListener("render", onRender);
+					
+					// show the contents of the response in the results page
+					currentState = "results";
+					accessToken.text = getAccessTokenEvent.accessToken;
+					refreshToken.text = getAccessTokenEvent.refreshToken;
+					tokenType.text = getAccessTokenEvent.tokenType;
+					expiresIn.text = getAccessTokenEvent.expiresIn + "";
+					scope.text = getAccessTokenEvent.scope;
+					state.text = getAccessTokenEvent.state;
+				}  // onGetAccessToken
+			}  // getAccessToken
+			
+			private function onRender(event:Event):void
+			{
+				var rectangle:Rectangle = viewPort.getBounds(stage);
+				if (rectangle.width > 0 && rectangle.height > 0)
+				{
+					stageWebView.viewPort = rectangle;
+				}  // if statement
+			}  // onRender
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:states>
+		<s:State name="intro"/>
+		<s:State name="results"/>
+	</s:states>
+	
+	<s:Group id="viewPort" width="100%" height="100%">
+		<s:Rect width="100%" height="100%">
+			<s:fill>
+				<s:SolidColor color="#cecece" />
+			</s:fill>
+		</s:Rect>
+	</s:Group>
+	
+	<s:VGroup id="introBox" includeIn="intro" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+		<s:Label text="ActionScript OAuth2 Library Demo" fontWeight="bold" />
+		<s:Spacer height="25" />
+		<s:TextArea text="Welcome to the ActionScript OAuth2 Library demo!  Just click the &quot;Go!&quot; button below to start the OAuth workflow.  To test against different OAuth 2.0 servers, choose different values from within the code, or provide your own!  The source for this project can be found on my GitHub account at https://github.com/charlesbihis/sandbox/tree/master/actionscript/actionscript-oauth2-mobile-demo." borderVisible="false" />
+		<s:Button label="Go!" click="getAccessToken()" />
+	</s:VGroup>
+	
+	<s:VGroup id="resultsBox" includeIn="results" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+		<s:Label text="Get-Access-Token Response" fontWeight="bold" />
+		<s:Spacer height="25" />
+		<s:Scroller left="5" right="5" top="5" bottom="5">
+			<s:Group>
+				<s:Label x="10" y="10" text="Access Token"/>
+				<s:TextInput id="accessToken" y="41" width="95%" horizontalCenter="0" />
+				<s:Label x="10" y="104" text="Refresh Token"/>
+				<s:TextInput id="refreshToken" y="135" width="95%" horizontalCenter="0" />
+				<s:Label x="10" y="198" text="Token Type"/>
+				<s:TextInput id="tokenType" y="229" width="95%" horizontalCenter="0" />
+				<s:Label x="10" y="292" text="Expires In"/>
+				<s:TextInput id="expiresIn" y="323" width="95%" horizontalCenter="0" />
+				<s:Label x="10" y="386" text="Scope"/>
+				<s:TextInput id="scope" y="417" width="95%" horizontalCenter="0" />
+				<s:Label x="10" y="480" text="State"/>
+				<s:TextInput id="state" y="511" width="95%" horizontalCenter="0" />
+			</s:Group>
+		</s:Scroller>
+	</s:VGroup>
+	
+</s:Application>

@@ -9,3 +9,8 @@ actionscript/actionscript-relative-date-demo/.settings
 actionscript/actionscript-relative-date-demo/bin-debug/*
 actionscript/actionscript-relative-date-demo/bin-release/*
 actionscript/actionscript-relative-date-demo/html-template/*
+
+# actionscript-oauth2-mobile-demo
+actionscript/actionscript-oauth2-mobile-demo/.settings
+actionscript/actionscript-oauth2-mobile-demo/bin-debug/*
+actionscript/actionscript-oauth2-mobile-demo/bin-release/*

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication
+		xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx"
+		width="1000" height="600"
+		creationComplete="init()">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.charlesbihis.engine.notification.NotificationConst;
+			import com.charlesbihis.engine.notification.NotificationManager;
+			import com.charlesbihis.engine.notification.ui.Notification;
+			
+			private var notificationManager:NotificationManager;
+			
+			private function init():void
+			{
+				// create engine with default settings
+				notificationManager = new NotificationManager(themeDropDown.selectedItem.data, imageInput.text, compactImageInput.text, (playSoundOption.selected ? soundInput.text : null), displayLengthSlider.value, displayLocationDropDown.selectedItem.data);
+				
+				// center window
+				nativeWindow.x = (Capabilities.screenResolutionX - nativeWindow.width) / 2;
+				nativeWindow.y = (Capabilities.screenResolutionY - nativeWindow.height) / 2;
+				
+				// show welcome message!
+				notificationManager.show("Welcome!", "More cowbell!", null);
+			}  // init
+			
+			private function showNotification():void
+			{
+				var notification:Notification = new Notification();
+				notification.title = titleInput.text;
+				notification.message = messageInput.text;
+				notification.image = (isCompactOption.selected ? compactImageInput.text : imageInput.text);
+				notification.link = linkInput.text;
+				notification.isCompact = isCompactOption.selected;
+				notification.isSticky = isStickyOption.selected;
+				notification.isReplayable = isReplayableOption.selected;
+				
+				notificationManager.showNotification(notification);
+			}  // showNotification
+			
+			private function changeEngine(event:Event = null):void
+			{
+				// throw away old engine and build a new one with the new settings
+				notificationManager = new NotificationManager(themeDropDown.selectedItem.data, imageInput.text, compactImageInput.text, (playSoundOption.selected ? soundInput.text : null), displayLengthSlider.value, displayLocationDropDown.selectedItem.data);
+			}  // changeEngine
+			
+			private function loadStyle():void
+			{
+				notificationManager.loadStyle(themeDropDown.selectedItem.data);
+			}  // loadStyle
+			
+			private function notificationDisplayLengthFormatter(value:String):String
+			{
+				return value + " seconds";
+			}  // notificationDisplayLengthFormatter
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<s:RadioButtonGroup id="soundGroup" itemClick="changeEngine(event);"/>
+		<s:ArrayCollection id="themesArray">
+			<fx:Object label="dark" data="/assets/style/dark.swf" />
+			<fx:Object label="light" data="/assets/style/light.swf" />
+		</s:ArrayCollection>
+		<s:ArrayCollection id="displayLocationsArray">
+			<fx:Object label="auto" data="{NotificationConst.DISPLAY_LOCATION_AUTO}" />
+			<fx:Object label="bottom-right" data="{NotificationConst.DISPLAY_LOCATION_BOTTOM_RIGHT}" />
+			<fx:Object label="top-right" data="{NotificationConst.DISPLAY_LOCATION_TOP_RIGHT}" />
+			<fx:Object label="top-left" data="{NotificationConst.DISPLAY_LOCATION_TOP_LEFT}" />
+			<fx:Object label="bottom-left" data="{NotificationConst.DISPLAY_LOCATION_BOTTOM_LEFT}" />
+		</s:ArrayCollection>
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout paddingTop="25" paddingRight="15" paddingBottom="15" paddingLeft="15" />
+	</s:layout>
+	
+	<s:VGroup width="100%" horizontalAlign="center">
+		<s:Label text="ActionScript Notification Engine Test Console" fontSize="25" />
+	</s:VGroup>
+	
+	<s:Spacer height="15" />
+	
+	<s:HGroup width="100%" height="100%">
+		<s:Form width="50%" height="100%">
+			<s:FormHeading label="Engine Settings" horizontalCenter="0" fontSize="16" />
+			<s:FormItem label="Theme:">
+				<s:DropDownList id="themeDropDown" dataProvider="{themesArray}" selectedIndex="0" change="loadStyle()" />
+			</s:FormItem>
+			<s:FormItem label="Display Location:">
+				<s:DropDownList id="displayLocationDropDown" dataProvider="{displayLocationsArray}" selectedIndex="0" change="changeEngine()" />
+			</s:FormItem>
+			<s:FormItem label="Sound:">
+				<s:TextInput id="soundInput" text="/assets/sounds/drop.mp3" width="250" enabled="{playSoundOption.selected}" />
+				<s:HGroup>
+					<s:RadioButton group="{soundGroup}" id="playSoundOption" selected="true" label="Yes" />
+					<s:RadioButton group="{soundGroup}" id="dontPlaySoundOption" label="No" />
+				</s:HGroup>
+			</s:FormItem>
+			<s:FormItem label="Display Length:">
+				<s:Label text="short     medium     long" fontSize="9" />
+				<s:HSlider id="displayLengthSlider" minimum="{NotificationConst.DISPLAY_LENGTH_SHORT}" maximum="{NotificationConst.DISPLAY_LENGTH_LONG}" value="{NotificationConst.DISPLAY_LENGTH_DEFAULT}" snapInterval="2" dataTipFormatFunction="notificationDisplayLengthFormatter" change="changeEngine()" />
+			</s:FormItem>
+		</s:Form>
+		
+		<s:Form width="50%" height="100%">
+			<s:FormHeading label="Notification Settings" horizontalCenter="0" fontSize="16" />
+			<s:FormItem label="Title:" required="true">
+				<s:TextInput id="titleInput" text="If looks could kill..." width="400" />
+			</s:FormItem>
+			<s:FormItem label="Message:">
+				<s:TextInput id="messageInput" text="You would be a shotgun!  BANG!!" width="400" enabled="{isNotCompactOption.selected}" />
+			</s:FormItem>
+			<s:FormItem label="Image:">
+				<s:TextInput id="imageInput" text="/assets/images/m6d-magnum-sidearm-50x50.png" width="400" enabled="{isNotCompactOption.selected}" />
+			</s:FormItem>
+			<s:FormItem label="Compact Image:">
+				<s:TextInput id="compactImageInput" text="/assets/images/m6d-magnum-sidearm-16x16.png" width="400" enabled="{isCompactOption.selected}" />
+			</s:FormItem>
+			<s:FormItem label="Link:">
+				<s:TextInput id="linkInput" text="http://charlesbihis.github.com/actionscript-notification-engine/" width="400" />
+			</s:FormItem>
+			<s:FormItem label="Is Compact?">
+				<s:HGroup>
+					<s:RadioButton groupName="compactGroup" id="isCompactOption" label="Yes" />
+					<s:RadioButton groupName="compactGroup" id="isNotCompactOption" label="No" selected="true" />
+				</s:HGroup>
+			</s:FormItem>
+			<s:FormItem label="Is Sticky?">
+				<s:HGroup>
+					<s:RadioButton groupName="stickyGroup" id="isStickyOption" label="Yes" />
+					<s:RadioButton groupName="stickyGroup" id="isNotStickyOption" label="No" selected="true" />
+				</s:HGroup>
+			</s:FormItem>
+			<s:FormItem label="Is Replayable?">
+				<s:HGroup>
+					<s:RadioButton groupName="replayableGroup" id="isReplayableOption" label="Yes" selected="true" />
+					<s:RadioButton groupName="replayableGroup" id="isNotReplayableOption" label="No" />
+				</s:HGroup>
+			</s:FormItem>
+			<s:FormItem width="100%">
+				<s:HGroup width="100%" horizontalAlign="right">
+					<s:Button label="Reset Defaults" />
+					<s:Button label="Show Notification" click="showNotification()" />
+				</s:HGroup>
+			</s:FormItem>
+		</s:Form>
+	</s:HGroup>
+	
+</s:WindowedApplication>

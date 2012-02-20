@@ -14,3 +14,8 @@ actionscript/actionscript-relative-date-demo/html-template/*
 actionscript/actionscript-oauth2-mobile-demo/.settings
 actionscript/actionscript-oauth2-mobile-demo/bin-debug/*
 actionscript/actionscript-oauth2-mobile-demo/bin-release/*
+
+# actionscript-notification-engine-demo
+actionscript/actionscript-notification-engine-demo/.settings
+actionscript/actionscript-notification-engine-demo/bin-debug/*
+actionscript/actionscript-notification-engine-demo/bin-release/*

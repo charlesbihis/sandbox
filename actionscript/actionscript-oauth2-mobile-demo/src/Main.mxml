@@ -11,7 +11,7 @@
 			import com.adobe.protocols.oauth2.grant.AuthorizationCodeGrant;
 			import com.adobe.protocols.oauth2.grant.IGrantType;
 			
-			import mx.logging.LogEventLevel;
+			import org.as3commons.logging.setup.LogSetupLevel;
 
 			private var stageWebView:StageWebView;
 			
@@ -28,26 +28,26 @@
 				stageWebView.stage = stage;
 				
 				// set up the call
-				var oauth2:OAuth2 = new OAuth2("https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token", LogEventLevel.DEBUG);
+				var oauth2:OAuth2 = new OAuth2("https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token", LogSetupLevel.DEBUG);
 				var grant:IGrantType = new AuthorizationCodeGrant(stageWebView, "INSERT_CLIENT_ID_HERE", "INSERT_CLIENT_SECRET_HERE", "http://www.mysite.com", "https://www.googleapis.com/auth/userinfo.profile");
 				
 				/**
 				 * Sample OAuth 2.0 Grant Type Configurations
 				 * 
 				 * Adobe Authorization Code Grant Example
-				 *   var oauth2:OAuth2 = new OAuth2("https://ims-na1.adobelogin.com/ims/authorize", "https://ims-na1.adobelogin.com/ims/token", LogEventLevel.DEBUG);
+				 *   var oauth2:OAuth2 = new OAuth2("https://ims-na1.adobelogin.com/ims/authorize", "https://ims-na1.adobelogin.com/ims/token", LogSetupLevel.DEBUG);
 				 *   var grant:IGrantType = new AuthorizationCodeGrant(stageWebView, "INSERT_CLIENT_ID_HERE", "INSERT_CLIENT_SECRET_HERE", "http://www.mysite.com", "openid");
 				 * 
 				 * Adobe Implicit Grant Example
-				 *   var oauth2:OAuth2 = new OAuth2("https://ims-na1.adobelogin.com/ims/authorize", "https://ims-na1.adobelogin.com/ims/token", LogEventLevel.DEBUG);
+				 *   var oauth2:OAuth2 = new OAuth2("https://ims-na1.adobelogin.com/ims/authorize", "https://ims-na1.adobelogin.com/ims/token", LogSetupLevel.DEBUG);
 				 *   var grant:IGrantType = new ImplicitGrant(stageWebView, "INSERT_CLIENT_ID_HERE", "http://www.mysite.com", "openid");
 				 * 
 				 * Google Authorization Code Grant Example
-				 *   var oauth2:OAuth2 = new OAuth2("https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token", LogEventLevel.DEBUG);
+				 *   var oauth2:OAuth2 = new OAuth2("https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token", LogSetupLevel.DEBUG);
 				 *   var grant:IGrantType = new AuthorizationCodeGrant(stageWebView, "INSERT_CLIENT_ID_HERE", "INSERT_CLIENT_SECRET_HERE", "http://www.mysite.com", "https://www.googleapis.com/auth/userinfo.profile");
 				 * 
 				 * Google Implicit Grant Example
-				 *   var oauth2:OAuth2 = new OAuth2("https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token", LogEventLevel.DEBUG);
+				 *   var oauth2:OAuth2 = new OAuth2("https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token", LogSetupLevel.DEBUG);
 				 *   var grant:IGrantType = new ImplicitGrant(stageWebView, "INSERT_CLIENT_ID_HERE", "http://www.mysite.com", "https://www.googleapis.com/auth/userinfo.profile");
 				 */
 				

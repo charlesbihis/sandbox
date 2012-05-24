@@ -8,8 +8,8 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import com.adobe.util.Diff;
-			import com.adobe.util.Operation;
+			import com.charlesbihis.util.Diff;
+			import com.charlesbihis.util.Operation;
 			
 			private var BEFORE_TEXT:String = "The quick brown fox jumps over the lazy dog.";
 			private var AFTER_TEXT:String = "The quick fox hops over the lazy brown dog.";

@@ -19,3 +19,24 @@ actionscript/actionscript-oauth2-mobile-demo/bin-release/*
 actionscript/actionscript-notification-engine-demo/.settings
 actionscript/actionscript-notification-engine-demo/bin-debug/*
 actionscript/actionscript-notification-engine-demo/bin-release/*
+
+# queue-from-stacks
+java/queue-from-stacks/bin/*
+
+# permutations-of-a-string
+java/permutations-of-a-string/bin/*
+
+# combinations-of-a-string
+java/combinations-of-a-string/bin/*
+
+# telephone-word-permutations
+java/telephone-word-permutations/bin/*
+
+# sqrt-estimation-by-binary-search
+java/sqrt-estimation-by-binary-search/bin/*
+
+# quine
+java/quine/bin/*
+
+# print-circular
+java/print-circular/bin/*

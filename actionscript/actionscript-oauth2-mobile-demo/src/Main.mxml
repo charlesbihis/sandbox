@@ -10,6 +10,7 @@
 			import com.adobe.protocols.oauth2.event.GetAccessTokenEvent;
 			import com.adobe.protocols.oauth2.grant.AuthorizationCodeGrant;
 			import com.adobe.protocols.oauth2.grant.IGrantType;
+			import com.adobe.protocols.oauth2.grant.ImplicitGrant;
 			
 			import org.as3commons.logging.setup.LogSetupLevel;
 
@@ -29,7 +30,8 @@
 				
 				// set up the call
 				var oauth2:OAuth2 = new OAuth2("https://accounts.google.com/o/oauth2/auth", "https://accounts.google.com/o/oauth2/token", LogSetupLevel.DEBUG);
-				var grant:IGrantType = new AuthorizationCodeGrant(stageWebView, "INSERT_CLIENT_ID_HERE", "INSERT_CLIENT_SECRET_HERE", "http://www.mysite.com", "https://www.googleapis.com/auth/userinfo.profile");
+//				var grant:IGrantType = new AuthorizationCodeGrant(stageWebView, "INSERT_CLIENT_ID_HERE", "INSERT_CLIENT_SECRET_HERE", "http://www.mysite.com", "https://www.googleapis.com/auth/userinfo.profile");
+				var grant:IGrantType = new ImplicitGrant(stageWebView, "64530189872.apps.googleusercontent.com", "http://localhost", "https://www.googleapis.com/auth/userinfo.profile");
 				
 				/**
 				 * Sample OAuth 2.0 Grant Type Configurations

@@ -46,3 +46,6 @@ java/find-prime-factors/bin/*
 
 # find-and-count-max
 java/find-and-count-max/bin/*
+
+# find-and-count-max-two
+java/find-and-count-max-two/bin/*

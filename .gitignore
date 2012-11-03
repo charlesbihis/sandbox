@@ -40,3 +40,6 @@ java/quine/bin/*
 
 # print-circular
 java/print-circular/bin/*
+
+# find-prime-factors
+java/find-prime-factors/bin/*

@@ -35,6 +35,9 @@ java/telephone-word-permutations/bin/*
 # sqrt-estimation-by-binary-search
 java/sqrt-estimation-by-binary-search/bin/*
 
+# sqrt-estimation-by-newtons-iteration
+java/sqrt-estimation-by-newtons-iteration/bin/*
+
 # quine
 java/quine/bin/*
 

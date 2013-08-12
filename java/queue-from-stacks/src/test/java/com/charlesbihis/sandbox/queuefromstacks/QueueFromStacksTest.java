@@ -3,12 +3,8 @@ package com.charlesbihis.sandbox.queuefromstacks;
 import java.util.LinkedList;
 import java.util.Random;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
-
-import com.charlesbihis.sandbox.queuefromstacks.Queue;
-import com.charlesbihis.sandbox.queuefromstacks.QueueFromStacks;
 
 public class QueueFromStacksTest {
 	@Test
@@ -25,7 +21,7 @@ public class QueueFromStacksTest {
 		
 		// check that they are equal
 		while (queue.size() > 0) {
-			Assert.assertEquals(list.remove(), queue.dequeue());
+			Assert.assertEquals(list.remove(), queue.dequeue(), 0);
 		}
 	}
 	

@@ -4,13 +4,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-import junit.framework.Assert;
 import junit.framework.TestCase;
 
+import org.junit.Assert;
 import org.junit.Test;
-
-import com.charlesbihis.sandbox.combinationsofastring.CombinationsOfAString;
-
 
 public class CombinationsOfAStringTest extends TestCase {
 	OutputStream outputStream = new ByteArrayOutputStream();

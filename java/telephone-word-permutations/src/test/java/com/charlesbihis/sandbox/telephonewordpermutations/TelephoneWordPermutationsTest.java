@@ -4,12 +4,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-import org.junit.Test;
-
-import com.charlesbihis.sandbox.telephonewordpermutations.TelephoneWordPermutations;
-
-import junit.framework.Assert;
 import junit.framework.TestCase;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 public class TelephoneWordPermutationsTest extends TestCase {
 OutputStream outputStream = new ByteArrayOutputStream();

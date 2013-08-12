@@ -1,20 +1,17 @@
 package com.charlesbihis.sandbox.sqrtestimationbybinarysearch;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
-
-import com.charlesbihis.sandbox.sqrtestimationbybinarysearch.SqrtEstimationByBinarySearch;
 
 public class SqrtEstimationByBinarySearchTest {
 	@Test
 	public void testPerfectSquareOfFour() {
-		Assert.assertEquals(2.0, SqrtEstimationByBinarySearch.sqrt(4));
+		Assert.assertEquals(2.0, SqrtEstimationByBinarySearch.sqrt(4), 0);
 	}
 	
 	@Test
 	public void testPerfectSquareOfSixteen() {
-		Assert.assertEquals(4.0, SqrtEstimationByBinarySearch.sqrt(16));
+		Assert.assertEquals(4.0, SqrtEstimationByBinarySearch.sqrt(16), 0);
 	}
 	
 	@Test

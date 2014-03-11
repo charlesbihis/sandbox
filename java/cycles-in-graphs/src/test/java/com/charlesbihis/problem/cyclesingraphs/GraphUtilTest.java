@@ -94,7 +94,7 @@ public class GraphUtilTest extends TestCase {
 	 * 		  1 - 2
 	 */
 	@Test
-	public void testThreeVerticesInCycle() {
+	public void testThreeVerticesWithCycle() {
 		BitSet[] adjacencyList = new BitSet[3];
 		for (int i = 0; i < adjacencyList.length; i++) {
 			adjacencyList[i] = new BitSet();

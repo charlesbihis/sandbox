@@ -1,54 +1,12 @@
-# actionscript-diff-demo
-actionscript/actionscript-diff-demo/.settings
-actionscript/actionscript-diff-demo/bin-debug/*
-actionscript/actionscript-diff-demo/bin-release/*
-actionscript/actionscript-diff-demo/html-template/*
+# Transient build files
+target/
+bin/
+bin-debug/
+bin-release/
 
-# actionscript-relative-date-demo
-actionscript/actionscript-relative-date-demo/.settings
-actionscript/actionscript-relative-date-demo/bin-debug/*
-actionscript/actionscript-relative-date-demo/bin-release/*
-actionscript/actionscript-relative-date-demo/html-template/*
+# Eclipse files
+.settings/
 
-# actionscript-oauth2-mobile-demo
-actionscript/actionscript-oauth2-mobile-demo/.settings
-actionscript/actionscript-oauth2-mobile-demo/bin-debug/*
-actionscript/actionscript-oauth2-mobile-demo/bin-release/*
-
-# actionscript-notification-engine-demo
-actionscript/actionscript-notification-engine-demo/.settings
-actionscript/actionscript-notification-engine-demo/bin-debug/*
-actionscript/actionscript-notification-engine-demo/bin-release/*
-
-# queue-from-stacks
-java/queue-from-stacks/bin/*
-
-# permutations-of-a-string
-java/permutations-of-a-string/bin/*
-
-# combinations-of-a-string
-java/combinations-of-a-string/bin/*
-
-# telephone-word-permutations
-java/telephone-word-permutations/bin/*
-
-# sqrt-estimation-by-binary-search
-java/sqrt-estimation-by-binary-search/bin/*
-
-# sqrt-estimation-by-newtons-iteration
-java/sqrt-estimation-by-newtons-iteration/bin/*
-
-# quine
-java/quine/bin/*
-
-# print-circular
-java/print-circular/bin/*
-
-# find-prime-factors
-java/find-prime-factors/bin/*
-
-# find-and-count-max
-java/find-and-count-max/bin/*
-
-# find-and-count-max-two
-java/find-and-count-max-two/bin/*
+# IntelliJ files
+.idea/
+*.iml

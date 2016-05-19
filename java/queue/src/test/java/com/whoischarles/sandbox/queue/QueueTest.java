@@ -21,8 +21,9 @@ public class QueueTest {
     queue.enqueue(2);
     queue.enqueue(3);
     queue.enqueue(4);
+    queue.enqueue(3);
     queue.enqueue(5);
-    Assert.assertEquals(5, queue.getSize());
+    Assert.assertEquals(6, queue.getSize());
 
     result = queue.dequeue();
     Assert.assertEquals(1, result);
@@ -35,6 +36,9 @@ public class QueueTest {
 
     result = queue.dequeue();
     Assert.assertEquals(4, result);
+
+    result = queue.dequeue();
+    Assert.assertEquals(3, result);
 
     result = queue.dequeue();
     Assert.assertEquals(5, result);

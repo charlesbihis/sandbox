@@ -7,8 +7,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class Main {
-  private static final String HUE_BRIDGE_ADDRESS = "http://xxx.xxx.xxx.xxx/api/";
-  private static final String USERNAME = "INSERT_USERNAME_HERE";
+  private static final String HUE_BRIDGE_ADDRESS = "http://192.168.1.175/api/";
+  private static final String USERNAME = "XKTKTsTaeum8KY7eNg5rsJvNoq2ghBTpbHwDRWC9";    // for "Jarvis"
 
   public static void main(String[] args) {
 //    System.out.println(createUser("Jarvis", ""));
